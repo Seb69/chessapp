@@ -187,7 +187,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
         //System.out.print(coordInitiale.x+ " "+ coordInitiale.y+" "+coordFinale.x+ " "+ coordFinale.y);
        	if (chessGameControler.move(coordInitiale, coordFinale)) 
        	{
-       		System.out.print("OK : "+chessGameControler.getMessage()+"\n");
+       		System.out.print(chessGameControler.getMessage()+"\n");
        	}
        	else
        	{
