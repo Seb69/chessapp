@@ -1,5 +1,6 @@
 package vue;
 
+import observateur.Observateur;
 import controler.controlerLocal.ChessGameControler;
 import model.Coord;
 import model.observable.ChessGame;
@@ -11,7 +12,7 @@ import model.observable.ChessGame;
  * Inspiration Jacques SARAYDARYAN, Adrien GUENARD *
  * 
  */
-public class ChessGameCmdLine {
+public class ChessGameCmdLine  implements Observateur{
 	
 	public   ChessGameCmdLine(ChessGameControler chessGameControler) {
 		
@@ -41,6 +42,12 @@ public class ChessGameCmdLine {
 		System.out.print("\n Déplacement de 3,4 vers 4,3 : ");
 		System.out.println(chessGameControler.getMessage() + "\n");	
 		System.out.println(chessGameControler + "\n");
+		
+	}
+
+	@Override
+	public void updateObservateur() {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -1,5 +1,58 @@
 package model.observable;
 
-public class ChessGame {
+import observable.Observable;
+import model.Couleur;
+import model.Echiquier;
+
+public class ChessGame extends Observable {
+	
+	Echiquier currentechiquier;
+	
+	//-----------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------
+	public ChessGame(){	
+		this.currentechiquier = new Echiquier ();
+	}
+	//-----------------------------------------------------------------------------------------
+	public String toString() {
+		String string;
+		
+		string = currentechiquier.toString() + "\n" ;
+		string = currentechiquier.getMessage();
+		
+		return string;
+	}
+	//-----------------------------------------------------------------------------------------
+	public boolean move (int xInit, int yInit, int xFinal, int yFinal) {
+		
+		if (!currentechiquier.isMoveOk( xInit,  yInit,  xFinal,  yFinal)) return false;
+		if (!currentechiquier.isMoveLegal( xInit,  yInit,  xFinal,  yFinal)) return false;
+		if (!currentechiquier.move ( xInit,  yInit,  xFinal,  yFinal)) return false ;
+		
+		currentechiquier.switchJoueur();
+		
+		notifyObservable();
+		
+		return true;
+	} 
+	//-----------------------------------------------------------------------------------------
+	public boolean isEnd() {
+		
+		return currentechiquier.isEnd();
+		
+	}
+	//-----------------------------------------------------------------------------------------
+	public String getMessage() {
+		
+		return currentechiquier.getMessage();
+		
+	}
+	//-----------------------------------------------------------------------------------------
+	public Couleur getColorCurrentPlayer() {
+		
+		return currentechiquier.getColorCurrentPlayer();
+	}
+
+
 
 }

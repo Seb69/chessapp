@@ -1,23 +1,51 @@
 package controler.controlerLocal;
 
 import model.Coord;
+import model.Couleur;
+import model.Echiquier;
 import model.observable.ChessGame;
 
-public class ChessGameControler {
+public class ChessGameControler implements ChessGameControlers {
 
+	
+	ChessGame currentchessGame;	
+	
 	public ChessGameControler(ChessGame chessGame) {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public void move(Coord coord, Coord coord2) {
-		// TODO Auto-generated method stub
+		
+		this.currentchessGame = chessGame;
 		
 	}
 
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String string;
+		string = currentchessGame.toString();
+		return string;
+		
+	}
+
+
+	@Override
+	public boolean move(Coord initCoord, Coord finalCoord) {
+		
+		if(currentchessGame.move( initCoord.x,  initCoord.y,  finalCoord.x,  finalCoord.y)) return true;
+			
+		return false;
+	}
+
+
+	@Override
+	public boolean isEnd() {
+		
+		return currentchessGame.isEnd();
+
+	}
+
+
+	@Override
+	public Couleur getColorCurrentPlayer() {
+	
+		return currentchessGame.getColorCurrentPlayer();
 	}
 
 }

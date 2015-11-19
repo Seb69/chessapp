@@ -112,7 +112,7 @@ public class Echiquier {
 
 	}
 
-	private boolean isMoveLegal(int xInit, int yInit, int xFinal, int yFinal) {
+	public boolean isMoveLegal(int xInit, int yInit, int xFinal, int yFinal) {
 
 		boolean isPieceOnPath = false;
 		Coord coordPieceInter = null;
