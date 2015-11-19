@@ -1,8 +1,11 @@
 package model.observable;
 
 import observable.Observable;
+import observateur.Observateur;
 import model.Couleur;
 import model.Echiquier;
+
+import java.util.List;
 
 public class ChessGame extends Observable {
 	
@@ -29,9 +32,8 @@ public class ChessGame extends Observable {
 		if (!currentechiquier.isMoveLegal( xInit,  yInit,  xFinal,  yFinal)) return false;
 		if (!currentechiquier.move ( xInit,  yInit,  xFinal,  yFinal)) return false ;
 		
+		notifyObservable(currentechiquier.getPiecesIHM());
 		currentechiquier.switchJoueur();
-		
-		notifyObservable();
 		
 		return true;
 	} 

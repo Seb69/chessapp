@@ -172,6 +172,7 @@ public class Echiquier {
 	public boolean move (int xInit, int yInit, int xFinal, int yFinal){
 
 		boolean ret = false;
+		
 
 		//	si déplacement légal
 		if(this.isMoveOk){ 

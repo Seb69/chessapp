@@ -37,10 +37,12 @@ public enum ChessPiecePos {
 
 	public static void main(String[] args) {
 		for (int i = 0; i < ChessPiecePos.values().length; i++) {
-			System.out.print(ChessPiecePos.values()[i].name() + " \t"); 
-			System.out.print(ChessPiecePos.values()[i].nom + " \t"); 
+			//System.out.print(ChessPiecePos.values()[i].name() + " \t"); 
+			//System.out.print(ChessPiecePos.values()[i].nom + " \t"); 
 			for (int j = 0; j < (ChessPiecePos.values()[i].coords).length; j++) {
-				System.out.print(ChessPiecePos.values()[i].coords[j] + " "); 				
+				
+				System.out.print(ChessPiecePos.values()[i].coords[j] + " "); 
+				
 			}
 			System.out.println();
 		}

@@ -122,6 +122,7 @@ public class Jeu  {
 		Pieces pieceToMove = null;
 
 		pieceToMove = this.findPiece(xInit, yInit);
+		
 		if (pieceToMove!=null){
 			ret = pieceToMove.move(xFinal, yFinal);
 

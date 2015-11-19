@@ -1,11 +1,12 @@
 package vue;
 
+import java.util.List;
+
 import observateur.Observateur;
 import controler.controlerLocal.ChessGameControler;
 import model.Coord;
+import model.PieceIHM;
 import model.observable.ChessGame;
-
-
 
 /**
  * @author francoise.perrin
@@ -46,8 +47,11 @@ public class ChessGameCmdLine  implements Observateur{
 	}
 
 	@Override
-	public void updateObservateur() {
-		// TODO Auto-generated method stub
+	public void updateObservateur(List<PieceIHM> ChessPieceList) {
+		
+		
+		
+		
 		
 	}
 

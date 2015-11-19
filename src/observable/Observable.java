@@ -2,18 +2,22 @@ package observable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import model.PieceIHM;
 import observateur.Observateur;
 
-public class Observable {
+public abstract class Observable {
 	
 	ArrayList<Observateur> observeurlist = new ArrayList<Observateur>();
 	
-public void notifyObservable()
+public void notifyObservable(List<PieceIHM> ChessPieceList)
 {
+	System.out.print("NOTIFY \n");
+	
 	for (Observateur obs : observeurlist)
 	{
-		obs.updateObservateur();
+		obs.updateObservateur(ChessPieceList);
 	}
 }
 
