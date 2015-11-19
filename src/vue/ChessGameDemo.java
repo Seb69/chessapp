@@ -25,6 +25,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
     ChessGameControler chessGameControler;
     ChessGame chessGame;
     List<PieceIHM> chessPieceListRefresh;
+    PieceIHM pieceIHM ;
     
     int xAdjustment;
     int yAdjustment;
@@ -38,12 +39,16 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 	public ChessGameDemo(){
         Dimension boardSize = new Dimension(600, 600);
         
+        //Nous instancions les class qui vont nous fournir les objects que nous allons manipuler 
         chessGame= new ChessGame();
-        chessGameControler= new ChessGameControler(chessGame);
+        chessGameControler= new ChessGameControler(chessGame);  
+        chessPieceListRefresh= new ArrayList<PieceIHM>();
         
+        
+        
+        //On ajoute cet observeur sur le liste des observeur de l'observable 
         chessGame.addObservateur(this);
         
- 
         //  Use a Layered Pane for this this application
  
         layeredPane = new JLayeredPane();
@@ -79,17 +84,27 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
      // Add a few pieces to the board
      		// Add white pieces
 			for (int i = 0; i < ChessPiecePos.values().length; i++) {
+				
+				//On recupere la piece 
+				pieceIHM = new PieceIHM(ChessPiecePos.values()[i].nom, ChessPiecePos.values()[i].couleur);
+	     		
 
 				for (int j = 0; j <(ChessPiecePos.values()[i].coords).length; j++) {
 					
 					piece = new JLabel(new ImageIcon(chessImageProvider.getImageFile(ChessPiecePos.values()[i].nom, ChessPiecePos.values()[i].couleur)));
 		     		
+					//Formule permettant de convertir les coordonnées en un int correspondant a une position sur le ddamier 
 		     		componentPosition=ChessPiecePos.values()[i].coords[j].x + Math.abs(ChessPiecePos.values()[i].coords[j].y-7)*8;
 		     		
 		     		panel = (JPanel) chessBoard.getComponent(componentPosition);
 		     		panel.add(piece);
-					
+		     
+		     		//On ajoute les coordonnes à la piece 
+		     		Coord coordPiece = new Coord(ChessPiecePos.values()[i].coords[j].x,ChessPiecePos.values()[i].coords[j].y);
+		     		pieceIHM.add(coordPiece);
+	
 				}
+				chessPieceListRefresh.add(i, pieceIHM);
 
 			}
 			
@@ -163,8 +178,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
         posY=Math.abs(posY-7);
         posYf=Math.abs(posYf-7);
         
-        System.out.print(posY);
-        System.out.print(" \n");
+
         Coord coordFinale= new Coord(posX,posY);
         Coord coordInitiale= new Coord(posXf,posYf);
         
@@ -173,13 +187,13 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
         //System.out.print(coordInitiale.x+ " "+ coordInitiale.y+" "+coordFinale.x+ " "+ coordFinale.y);
        	if (chessGameControler.move(coordInitiale, coordFinale)) 
        	{
-       		System.out.print("Deplacement is OK\n");
+       		System.out.print("OK : "+chessGameControler.getMessage()+"\n");
        	}
        	else
        	{
-       		System.out.print("Deplacement not allowed \n");
        		refreshObservateur(chessPieceListRefresh);
-       		
+       		System.out.print(chessGameControler.getMessage()+"\n");
+
        	}
         return;
     }
@@ -270,8 +284,12 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 
 	
 	public void refreshObservateur(List<PieceIHM> chessPieceList) {
-
+		
+		if (chessPieceList.isEmpty()) updateObservateur(chessPieceListRefresh);
+		
 		updateObservateur(chessPieceList);
+		
+		
 	}
 }
 

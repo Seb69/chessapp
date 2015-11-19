@@ -19,7 +19,7 @@ public class ChessGameControler implements ChessGameControlers {
 	public String getMessage() {
 		
 		String string;
-		string = currentchessGame.toString();
+		string = currentchessGame.getMessage();
 		return string;
 		
 	}

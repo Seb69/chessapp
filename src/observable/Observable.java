@@ -13,7 +13,7 @@ public abstract class Observable {
 	
 public void notifyObservable(List<PieceIHM> ChessPieceList)
 {
-	System.out.print("NOTIFY \n");
+
 	
 	for (Observateur obs : observeurlist)
 	{

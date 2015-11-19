@@ -15,7 +15,7 @@ public  class PieceIHM {
 	Couleur couleur;
 	List<Coord> list;
 	
-	PieceIHM(String type, Couleur couleur) {
+	public PieceIHM(String type, Couleur couleur) {
 		this.type = type;
 		this.couleur = couleur;
 		list = new LinkedList<Coord>();

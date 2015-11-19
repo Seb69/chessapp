@@ -35,6 +35,8 @@ public class ChessGame extends Observable {
 		notifyObservable(currentechiquier.getPiecesIHM());
 		currentechiquier.switchJoueur();
 		
+		currentechiquier.getMessage();
+		
 		return true;
 	} 
 	//-----------------------------------------------------------------------------------------
