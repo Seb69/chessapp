@@ -1,7 +1,10 @@
 package launcher.localLauncher;
 
+import javax.swing.JFrame;
+
 import model.observable.ChessGame;
 import vue.ChessGameCmdLine;
+import vue.ChessGameDemo;
 import controler.controlerLocal.ChessGameControler;
 
 
@@ -11,15 +14,16 @@ import controler.controlerLocal.ChessGameControler;
  */
 public class LauncherCmdLine {
 	
-	public static void main(String[] args) {		
-		
-		ChessGame chessGame;
-		ChessGameControler chessGameControler;		
-		
-		chessGame = new ChessGame();	
-		chessGameControler = new ChessGameControler(chessGame);
-		
-		new ChessGameCmdLine(chessGameControler);	
-	}
+    private static final int DISPOSE_ON_CLOSE = 2;
+
+	public static void main(String[] args) {
+        JFrame frame = new ChessGameDemo();
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
+        frame.pack();
+        frame.setResizable(true);
+        frame.setLocationRelativeTo( null );
+        frame.setVisible(true);
+     }
+    
 
 }

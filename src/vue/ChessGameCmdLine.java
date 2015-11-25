@@ -49,10 +49,6 @@ public class ChessGameCmdLine  implements Observateur{
 	@Override
 	public void updateObservateur(List<PieceIHM> ChessPieceList) {
 		
-		
-		
-		
-		
 	}
 
 }
