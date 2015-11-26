@@ -13,6 +13,7 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 	public static final String SERVER = "serveur";
 	public static final String CLIENT = "client";
 	Communication communication;
+	Thread readThread;
 	
 	String type;
 	
@@ -40,14 +41,27 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 	@Override
 	public boolean move(Coord initCoord, Coord finalCoord) {
 		
+		interruptThread( readThread);
 		
 		communication.write();
 		
-		System.out.println("OK dans le move");
+		//restartThread( readThread); 
+		
 		if(currentchessGame.move( initCoord.x,  initCoord.y,  finalCoord.x,  finalCoord.y)) return true;
 			
 		return false;
 	}
+	
+
+	public boolean moveRead() {
+		
+		
+		
+	System.out.println("On est dans le moveRead");
+		
+		return false;
+	}
+
 
 	@Override
 	public boolean isEnd() {
@@ -70,8 +84,24 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 		if (SERVER.equals(type)) communication.runServer();
 		if (CLIENT.equals(type)) communication.runClient();
 
-		Thread readThread = new Thread(new ListenningSocket(communication));
+		readThread = new Thread(new ListenningSocket(communication,this));
 		readThread.start();
+		
+	}
+	
+	public void interruptThread(Thread thread)
+	{
+		thread.interrupt();
+		while (!thread.isInterrupted())
+		{
+			//On fait rien
+		}
+		
+	}
+	public void restartThread(Thread thread)
+	{
+		thread.start();
+		
 	}
 
 }

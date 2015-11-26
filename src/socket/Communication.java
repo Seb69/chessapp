@@ -22,6 +22,8 @@ public class Communication {
 		private PrintWriter out = null;
 
 		private Thread tEmission, tReception;
+		
+		public String messageRead = null;
 	 
 public void runClient()
 {
@@ -29,7 +31,7 @@ public void runClient()
 	try {
 		
 		System.out.println("Demande de connexion cote client");
-		socket = new Socket("127.0.0.1",2010);
+		socket = new Socket("127.0.0.1",2019);
 		System.out.println("Connexion établie avec le serveur"); // Si le message s'affiche c'est que je suis connecté
 		
 		//t1 = new Thread(new Connexion(socket));
@@ -49,7 +51,7 @@ public void runServer()
 			
 			try {
 				
-				ss = new ServerSocket(2010);
+				ss = new ServerSocket(2019);
 				System.out.println("Attente de la connexion client");
 				socket = ss.accept();
 				System.out.println("Client connecté");
@@ -87,11 +89,11 @@ public void read ()
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-
+	System.out.println("on est entré dans le read");
 	
-	//Thread tReception = new Thread(new Reception(in));
-	//tReception.start();
-
+	Thread tReception = new Thread(new Reception(in,this));
+	tReception.start();
+	
 	
 }
 
