@@ -24,6 +24,12 @@ public class Communication {
 		private Thread tEmission, tReception;
 		
 		public String messageRead = null;
+		public String messageSend = null;
+		
+		public String WRITER;
+		
+		
+
 	 
 public void runClient()
 {
@@ -34,8 +40,6 @@ public void runClient()
 		socket = new Socket("127.0.0.1",2019);
 		System.out.println("Connexion établie avec le serveur"); // Si le message s'affiche c'est que je suis connecté
 		
-		//t1 = new Thread(new Connexion(socket));
-		//t1.start();
 		
 	} catch (UnknownHostException e) {
 	  System.err.println("Impossible de se connecter à l'adresse "+socket.getLocalAddress());
@@ -65,7 +69,7 @@ public void runServer()
 	
 }	
 
-public void write ()
+public void write (String messageToSend)
 {
 	
 	try {
@@ -75,8 +79,7 @@ public void write ()
 		e.printStackTrace();
 	}
 	
-	
-	Thread tEmission = new Thread(new Emission(out));
+	Thread tEmission = new Thread(new Emission(out,messageToSend));
 	tEmission.start();
 	
 }
@@ -94,6 +97,12 @@ public void read ()
 	Thread tReception = new Thread(new Reception(in,this));
 	tReception.start();
 	
+	
+}
+
+public void addObservateurReception (ChessGameControler chessGameControler)
+{
+	Reception.
 	
 }
 

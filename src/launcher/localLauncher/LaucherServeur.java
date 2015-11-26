@@ -20,27 +20,27 @@ public class LaucherServeur {
 	public static void main(String[] args) {
 
 
-		ChessGame chessGame;
-		ChessGameControler chessGameControler;	
-		ChessGameDemo chessGameDemo;
+		ChessGame chessGameServeur;
+		ChessGameControler chessGameControlerServeur;	
+		ChessGameDemo chessGameDemoServeur;
 
-		chessGame = new ChessGame();	
-		chessGameControler = new ChessGameControler(chessGame,ChessGameControler.SERVER);
+		chessGameServeur = new ChessGame();	
+		chessGameControlerServeur = new ChessGameControler(chessGameServeur,ChessGameControler.SERVER);
 
 
-		Thread threadCient = new Thread(chessGameControler);
+		Thread threadCient = new Thread(chessGameControlerServeur);
 		threadCient.start();
 
-		chessGameDemo = new ChessGameDemo(chessGameControler);	
-		chessGameDemo.setVisible(true);
+		chessGameDemoServeur = new ChessGameDemo(chessGameControlerServeur);	
+		chessGameDemoServeur.setVisible(true);
 
-		chessGameDemo.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
-		chessGameDemo.pack();
-		chessGameDemo.setResizable(true);
-		chessGameDemo.setLocationRelativeTo( null );
-		chessGameDemo.setVisible(true);
+		chessGameDemoServeur.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
+		chessGameDemoServeur.pack();
+		chessGameDemoServeur.setResizable(true);
+		chessGameDemoServeur.setLocationRelativeTo( null );
+		chessGameDemoServeur.setVisible(true);
 
-		chessGame.addObservateur(chessGameDemo);
+		chessGameServeur.addObservateur(chessGameDemoServeur);
 
 	}
 }

@@ -22,26 +22,44 @@ public class ListenningSocket implements Runnable  {
 
 		while (true)
 		{
-			if (isMessageChanged(communication.messageRead)) 
+			
+			//System.out.println("Listenning thread launch");
+	
+			 // && !communication.WRITER.equals(chessGameControler.typ
+			Boolean test =  isMessageChanged( communication.messageRead);
+			if (isMessageChanged( communication.messageRead)) System.out.println("TRUE");
+			
+			if (!(chessGameControler.type).equals(communication.messageRead) && !(chessGameControler.type).equals(null) && isMessageChanged( communication.messageRead)) 
 			{
-				System.out.println("Message recu");
+				
+				System.out.println("On lance le moveRead");
 				chessGameControler.moveRead();
 				
+			
 
 			}
+		
 		}
 
 	}
 
 	public Boolean isMessageChanged(String messageToTest)
 	{
-		if (messageToTest!=temp) 
+		if(temp==null) return false;
+		
+		if (temp.equals(messageToTest)) 
 		{
-			temp=communication.messageRead;
+			return false;
+		}
+		else
+		{
+			temp=messageToTest;
 			return true;
+			
 		}
 
-		return false;
+	
 	}
+	
 
 }

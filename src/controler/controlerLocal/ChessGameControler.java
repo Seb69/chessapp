@@ -1,12 +1,17 @@
 package controler.controlerLocal;
 
+import java.util.List;
+
+
+import observateur.ObservateurReception;
 import socket.Communication;
 import model.Coord;
 import model.Couleur;
 import model.Echiquier;
+import model.PieceIHM;
 import model.observable.ChessGame;
 
-public class ChessGameControler implements ChessGameControlers, Runnable {
+public class ChessGameControler  implements ChessGameControlers, Runnable, ObservateurReception {
 
 	
 	ChessGame currentchessGame;	
@@ -41,11 +46,11 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 	@Override
 	public boolean move(Coord initCoord, Coord finalCoord) {
 		
-		interruptThread( readThread);
+
 		
-		communication.write();
+		communication.write(type);
 		
-		//restartThread( readThread); 
+
 		
 		if(currentchessGame.move( initCoord.x,  initCoord.y,  finalCoord.x,  finalCoord.y)) return true;
 			
@@ -57,7 +62,8 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 		
 		
 		
-	System.out.println("On est dans le moveRead");
+	System.out.println("Appelle du moveRead");
+	
 		
 		return false;
 	}
@@ -79,10 +85,11 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 	@Override
 	public void run() {
 		
-		
 		// TODO Auto-generated method stub
 		if (SERVER.equals(type)) communication.runServer();
 		if (CLIENT.equals(type)) communication.runClient();
+		
+		addObservateurReception();
 
 		readThread = new Thread(new ListenningSocket(communication,this));
 		readThread.start();
@@ -103,5 +110,17 @@ public class ChessGameControler implements ChessGameControlers, Runnable {
 		thread.start();
 		
 	}
+
+
+	@Override
+	public void updateObservateur() {
+		// TODO Auto-generated method stub
+		moveRead();
+		
+		
+	}
+
+
+
 
 }

@@ -8,11 +8,12 @@ import java.util.Scanner;
 public class Emission implements Runnable {
 
 	private PrintWriter out;
-	private String message = null;
+	private String messageToSend = null;
 
 	
-	public Emission(PrintWriter out) {
+	public Emission(PrintWriter out,String messageToSend) {
 		this.out = out;
+		this.messageToSend=messageToSend;
 	}
 
 	
@@ -21,9 +22,18 @@ public class Emission implements Runnable {
 		
 		  
 		  while(true){
-				message = "On ecrit dans la socket";
-				out.println(message);
+			  System.out.println("Emission : " + messageToSend);
+		
+				out.println(messageToSend);
 			    out.flush();
+			    
+			    try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    break;
 			  }
 	}
 }

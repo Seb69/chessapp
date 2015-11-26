@@ -2,8 +2,12 @@ package socket;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import observable.ObservableReception;
 
-public class Reception implements Runnable {
+
+
+
+public class Reception extends ObservableReception implements Runnable {
 
 	private BufferedReader in;
 	private String message = null;
@@ -16,18 +20,23 @@ public class Reception implements Runnable {
 	}
 	
 	public void run() {
-		System.out.println("on est entré dans Reception");
+		
 		
 		while(true){
 	        try {
 	        	
 			message = in.readLine();
 			
-			if (!("".equals(message))) System.out.println("on ecrit dans messageRead de l'object communication");;
+		    try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			if (!("".equals(message))) communication.messageRead = message;
+			if (!("".equals(message))) System.out.println("Reception : " + message);
 			
-			System.out.println(message);
+			if (!("".equals(message))) notifyObservableReception();
 			
 			
 		    } catch (IOException e) {
