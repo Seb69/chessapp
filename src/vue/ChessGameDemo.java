@@ -23,7 +23,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
     
     ChessImageProvider chessImageProvider;
     ChessGameControler chessGameControler;
-    ChessGame chessGame;
+
     List<PieceIHM> chessPieceListRefresh;
     PieceIHM pieceIHM ;
     
@@ -36,18 +36,14 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
  
  
 
-	public ChessGameDemo(){
+	public ChessGameDemo(ChessGameControler chessGameControler){
+		
         Dimension boardSize = new Dimension(600, 600);
-        
-        //Nous instancions les class qui vont nous fournir les objects que nous allons manipuler 
-        chessGame= new ChessGame();
-        chessGameControler= new ChessGameControler(chessGame);  
+ 
+        this.chessGameControler= chessGameControler;     
+ 
         chessPieceListRefresh= new ArrayList<PieceIHM>();
-        
-        
-        
-        //On ajoute cet observeur sur le liste des observeur de l'observable 
-        chessGame.addObservateur(this);
+
         
         //  Use a Layered Pane for this this application
  
@@ -59,7 +55,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 
         //Add a chess board to the Layered Pane 
  
-         chessBoard = new JPanel();
+        chessBoard = new JPanel();
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
         chessBoard.setLayout( new GridLayout(8, 8) );
         chessBoard.setPreferredSize( boardSize );
@@ -211,15 +207,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
     	
     }
  
-    public static void main(String[] args) {
-        JFrame frame = new ChessGameDemo();
-        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
-        frame.pack();
-        frame.setResizable(true);
-        frame.setLocationRelativeTo( null );
-        frame.setVisible(true);
-     }
-    
+
 
 	@Override
 	public void updateObservateur(List<PieceIHM> chessPieceList) {
