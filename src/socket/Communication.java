@@ -13,7 +13,7 @@ public class Communication {
 	public static ServerSocket ss = null;
 	public static Socket socket = null;
 
-	public Object object;
+	
 
 	public void runClient()
 	{

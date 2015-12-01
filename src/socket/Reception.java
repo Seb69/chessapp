@@ -48,7 +48,7 @@ public class Reception extends ObservableReception implements Runnable {
 			if (object!=null)
 			{
 				System.out.println("Reception : " + object.toString());
-				communication.object = object;
+				
 				notifyObservableReception(object);
 			}
 
