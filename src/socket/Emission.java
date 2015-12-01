@@ -1,38 +1,61 @@
 package socket;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Scanner;
 
 
 public class Emission implements Runnable {
 
-	private PrintWriter out;
-	private String messageToSend = null;
 
+	private Object objectToSend ;
+	public Socket socket = null;
+	private ObjectOutputStream out;
 	
-	public Emission(PrintWriter out,String messageToSend) {
-		this.out = out;
-		this.messageToSend=messageToSend;
+	public Emission(Socket socket,Object objectToSend) {
+		this.socket = socket;
+		this.objectToSend=objectToSend;
 	}
 
 	
 	public void run() {
 		
 		
+		try {
+			out = new ObjectOutputStream(socket.getOutputStream());
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		  
 		  while(true){
-			  System.out.println("Emission : " + messageToSend);
-		
-				out.println(messageToSend);
-			    out.flush();
-			    
+			
+			 
+			  
 			    try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
+			    	
+			    	if (objectToSend!=null)
+			    	{
+			    	
+			    
+					out.writeObject(objectToSend);
+					out.flush();
+					
+					
+					System.out.println("Emission : " + objectToSend.toString());
+			    	}
+						
+				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
+			    
+			    
+				
+			    
+			  
 			    break;
 			  }
 	}

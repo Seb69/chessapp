@@ -3,10 +3,14 @@ package socket;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import observateur.ObservateurReception;
 
 public class Communication {
 	
@@ -18,15 +22,21 @@ public class Communication {
 		
 		
 
-		private BufferedReader in = null;
-		private PrintWriter out = null;
+		//private BufferedReader in = null;
+		private ObjectInputStream in;
+		//private PrintWriter out = null;
+		private ObjectOutputStream out;
 
 		private Thread tEmission, tReception;
 		
 		public String messageRead = null;
 		public String messageSend = null;
 		
+		public Reception reception;
+		
 		public String WRITER;
+		public Object object;
+		public String objectType;
 		
 		
 
@@ -69,40 +79,34 @@ public void runServer()
 	
 }	
 
-public void write (String messageToSend)
+public void write (Object objectToSend)
 {
 	
-	try {
-		out = new PrintWriter(socket.getOutputStream());
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	Thread tEmission = new Thread(new Emission(out,messageToSend));
+		//out = new PrintWriter(socket.getOutputStream());
+
+
+
+	Thread tEmission = new Thread(new Emission(socket,objectToSend));
 	tEmission.start();
 	
 }
 
-public void read ()
+public void read (ObservateurReception observateurreception)
 {
-	try {
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	System.out.println("on est entré dans le read");
+
+	reception =new Reception(socket,this);
 	
-	Thread tReception = new Thread(new Reception(in,this));
+	reception.addObservateurReception(observateurreception);
+	
+	Thread tReception = new Thread(reception);
+
 	tReception.start();
-	
 	
 }
 
-public void addObservateurReception (ChessGameControler chessGameControler)
+public void addObservateurReception (ObservateurReception observateurreception)
 {
-	Reception.
+	
 	
 }
 

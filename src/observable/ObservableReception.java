@@ -17,7 +17,7 @@ public abstract class ObservableReception {
 		
 		for (ObservateurReception obs : observeurlist)
 		{
-			obs.updateObservateur();
+			obs.updateObservateurReception();
 		}
 	}
 

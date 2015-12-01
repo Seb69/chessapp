@@ -38,7 +38,7 @@ public  class LaucherClient {
 			threadCient.start();
 			
 			chessGameDemoClient = new ChessGameDemo(chessGameControlerClient);	
-			chessGameDemoClient.setVisible(true);
+
 
 			chessGameDemoClient.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
 			chessGameDemoClient.pack();
@@ -48,6 +48,6 @@ public  class LaucherClient {
 			
 			chessGameClient.addObservateur(chessGameDemoClient);
 		}
-	    
+	     
 
 }

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ObservateurReception {
 	
-	public void updateObservateur();
+	public Boolean updateObservateurReception();
 
 }

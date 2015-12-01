@@ -28,11 +28,10 @@ public class LaucherServeur {
 		chessGameControlerServeur = new ChessGameControler(chessGameServeur,ChessGameControler.SERVER);
 
 
-		Thread threadCient = new Thread(chessGameControlerServeur);
-		threadCient.start();
+		Thread threadServeur = new Thread(chessGameControlerServeur);
+		threadServeur.start();
 
 		chessGameDemoServeur = new ChessGameDemo(chessGameControlerServeur);	
-		chessGameDemoServeur.setVisible(true);
 
 		chessGameDemoServeur.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
 		chessGameDemoServeur.pack();

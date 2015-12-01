@@ -2,7 +2,6 @@ package controler.controlerLocal;
 
 import java.util.List;
 
-
 import observateur.ObservateurReception;
 import socket.Communication;
 import model.Coord;
@@ -19,12 +18,15 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 	public static final String CLIENT = "client";
 	Communication communication;
 	Thread readThread;
+	public ObjectToSend objectToSend;
+	
 	
 	String type;
 	
 	public ChessGameControler(ChessGame chessGame, String type) {
 		
 		communication = new Communication();
+		objectToSend = new ObjectToSend();
 		
 		this.currentchessGame = chessGame;
 		this.type=type;
@@ -46,11 +48,11 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 	@Override
 	public boolean move(Coord initCoord, Coord finalCoord) {
 		
-
 		
-		communication.write(type);
+		objectToSend.setCoordInit(initCoord);
+		objectToSend.setCoordFinal(finalCoord);
 		
-
+		communication.write(objectToSend);
 		
 		if(currentchessGame.move( initCoord.x,  initCoord.y,  finalCoord.x,  finalCoord.y)) return true;
 			
@@ -58,15 +60,7 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 	}
 	
 
-	public boolean moveRead() {
-		
-		
-		
-	System.out.println("Appelle du moveRead");
-	
-		
-		return false;
-	}
+
 
 
 	@Override
@@ -89,33 +83,31 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 		if (SERVER.equals(type)) communication.runServer();
 		if (CLIENT.equals(type)) communication.runClient();
 		
-		addObservateurReception();
+	
+		communication.read(this);
+		
+		//listenningSocket = new ListenningSocket(communication,this);
 
-		readThread = new Thread(new ListenningSocket(communication,this));
-		readThread.start();
 		
 	}
 	
-	public void interruptThread(Thread thread)
-	{
-		thread.interrupt();
-		while (!thread.isInterrupted())
-		{
-			//On fait rien
-		}
-		
-	}
-	public void restartThread(Thread thread)
-	{
-		thread.start();
-		
-	}
+
 
 
 	@Override
-	public void updateObservateur() {
-		// TODO Auto-generated method stub
-		moveRead();
+	public Boolean updateObservateurReception() {
+
+		
+		System.out.println("Appelle du moveRead");
+		objectToSend = (ObjectToSend) communication.object;
+		
+		System.out.println(objectToSend.toString());
+	
+
+	if (currentchessGame.move( objectToSend.getCoordInit().x,  objectToSend.getCoordInit().y,  objectToSend.getCoordFinal().x,  objectToSend.getCoordFinal().y)) return true;
+
+	
+		return false ;
 		
 		
 	}

@@ -18,6 +18,7 @@ public class ChessGame extends Observable {
 	}
 	//-----------------------------------------------------------------------------------------
 	public String toString() {
+		
 		String string;
 		
 		string = currentechiquier.toString() + "\n" ;
@@ -33,6 +34,7 @@ public class ChessGame extends Observable {
 		if (!currentechiquier.move ( xInit,  yInit,  xFinal,  yFinal)) return false ;
 		
 		notifyObservable(currentechiquier.getPiecesIHM());
+		
 		currentechiquier.switchJoueur();
 		
 		currentechiquier.getMessage();

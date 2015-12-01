@@ -1,6 +1,8 @@
 package socket;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 
 import observable.ObservableReception;
 
@@ -9,40 +11,50 @@ import observable.ObservableReception;
 
 public class Reception extends ObservableReception implements Runnable {
 
-	private BufferedReader in;
+
 	private String message = null;
 	Communication communication;
-	
-	public Reception(BufferedReader in, Communication communication){
-		
-		this.in = in;
+	private Object object;
+	private Socket socket;
+
+
+	public Reception(Socket socket, Communication communication){
+
+		this.socket = socket;
 		this.communication=communication;
 	}
-	
+
 	public void run() {
-		
-		
+
+
 		while(true){
-	        try {
-	        	
-			message = in.readLine();
-			
-		    try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
+
+
+			try {
+				ObjectInputStream in;
+				in = new ObjectInputStream(socket.getInputStream());
+
+				try {
+					object = in.readObject();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} catch (IOException e2) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e2.printStackTrace();
 			}
-			
-			if (!("".equals(message))) System.out.println("Reception : " + message);
-			
-			if (!("".equals(message))) notifyObservableReception();
-			
-			
-		    } catch (IOException e) {
-				
-				e.printStackTrace();
+
+			if (object!=null)
+			{
+				System.out.println("Reception : " + object.toString());
+				communication.object = object;
+				notifyObservableReception();
 			}
+
+
+
 		}
 	}
 
