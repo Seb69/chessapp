@@ -1,22 +1,10 @@
 package launcher.localLauncher;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
-import javax.swing.JFrame;
-
 import model.observable.ChessGame;
 import controler.controlerLocal.ChessGameControler;
 import vue.ChessGameDemo;
 
 public  class LaucherClient {
-
-	
 
 	    private static final int DISPOSE_ON_CLOSE = 2;
 		
@@ -27,8 +15,6 @@ public  class LaucherClient {
 	    	ChessGame chessGameClient;
 	    	ChessGameControler chessGameControlerClient;	
 			ChessGameDemo chessGameDemoClient;
-	
-			
 			
 			chessGameClient = new ChessGame();	
 			chessGameControlerClient = new ChessGameControler(chessGameClient,ChessGameControler.CLIENT);

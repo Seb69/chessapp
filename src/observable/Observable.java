@@ -1,9 +1,7 @@
 package observable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import model.PieceIHM;
 import observateur.Observateur;
 

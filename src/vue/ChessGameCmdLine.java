@@ -6,7 +6,7 @@ import observateur.Observateur;
 import controler.controlerLocal.ChessGameControler;
 import model.Coord;
 import model.PieceIHM;
-import model.observable.ChessGame;
+
 
 /**
  * @author francoise.perrin

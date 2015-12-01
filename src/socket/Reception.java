@@ -1,5 +1,5 @@
 package socket;
-import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -12,7 +12,6 @@ import observable.ObservableReception;
 public class Reception extends ObservableReception implements Runnable {
 
 
-	private String message = null;
 	Communication communication;
 	private Object object;
 	private Socket socket;

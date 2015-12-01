@@ -3,16 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
-
 import javax.swing.*;
-
 import controler.controlerLocal.ChessGameControler;
 import observateur.Observateur;
 import tools.*;
 import model.Coord;
-import model.Couleur;
 import model.PieceIHM;
-import model.observable.ChessGame;
+
 
 
  
@@ -67,9 +64,9 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
  
             int row = (i / 8) % 2;
             if (row == 0)
-                square.setBackground( i % 2 == 0 ? Color.blue : Color.white );
+                square.setBackground( i % 2 == 0 ? Color.black : Color.white );
             else
-                square.setBackground( i % 2 == 0 ? Color.white : Color.blue );
+                square.setBackground( i % 2 == 0 ? Color.white : Color.black );
         }
  
     	JLabel piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/chess.jpg"));
@@ -231,30 +228,8 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 		
 		System.out.println("update");
 		
-//        //  Use a Layered Pane for this this application	
-//        layeredPane = new JLayeredPane();
-//        layeredPane.revalidate();
-//        layeredPane.repaint();
-//        
-//        getContentPane().add(layeredPane);
-//        layeredPane.setPreferredSize(boardSize);
-//        layeredPane.addMouseListener(this);
-//        layeredPane.addMouseMotionListener(this);
-//        
-
-        //Add a chess board to the Layered Pane  
-//        chessBoard = new JPanel();
-//        chessBoard.revalidate();
-//        chessBoard.repaint();
-        
-        layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-        chessBoard.setLayout( new GridLayout(8, 8) );
-        chessBoard.setPreferredSize( boardSize );
-        chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
-      
-        //System.out.println(i);
-
-        
+    
+    
         
         for (int i = 0; i < 64; i++) {
 
@@ -266,13 +241,13 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
             if (row == 0)
             {
             	
-                square.setBackground( i % 2 == 0 ? Color.blue : Color.white );
+                square.setBackground( i % 2 == 0 ? Color.black : Color.white );
                 
             }
             else
             {
             	
-                square.setBackground( i % 2 == 0 ? Color.white : Color.blue );
+                square.setBackground( i % 2 == 0 ? Color.white : Color.black );
             }
         }
  
@@ -299,6 +274,12 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 			}
  			
  		}
+ 		
+ 	    layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+        chessBoard.setLayout( new GridLayout(8, 8) );
+        chessBoard.setPreferredSize( boardSize );
+        chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
+        
  		chessBoard.revalidate();
  		chessBoard.repaint();
     

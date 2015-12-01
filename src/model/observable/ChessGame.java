@@ -1,11 +1,8 @@
 package model.observable;
 
 import observable.Observable;
-import observateur.Observateur;
 import model.Couleur;
 import model.Echiquier;
-
-import java.util.List;
 
 public class ChessGame extends Observable {
 	
