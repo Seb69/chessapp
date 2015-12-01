@@ -222,21 +222,31 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 		chessPieceListRefresh=chessPieceList;
 		
 	
-		layeredPane.setVisible(false);
-		chessBoard.setVisible(false);
+//		layeredPane.setVisible(false);
+//		chessBoard.setVisible(false);
+		layeredPane.removeAll();
+		chessBoard.removeAll();
+		
+		
 		
 		System.out.println("update");
 		
-        //  Use a Layered Pane for this this application	
-        layeredPane = new JLayeredPane();
-        getContentPane().add(layeredPane);
-        layeredPane.setPreferredSize(boardSize);
-        layeredPane.addMouseListener(this);
-        layeredPane.addMouseMotionListener(this);
-        
+//        //  Use a Layered Pane for this this application	
+//        layeredPane = new JLayeredPane();
+//        layeredPane.revalidate();
+//        layeredPane.repaint();
+//        
+//        getContentPane().add(layeredPane);
+//        layeredPane.setPreferredSize(boardSize);
+//        layeredPane.addMouseListener(this);
+//        layeredPane.addMouseMotionListener(this);
+//        
 
         //Add a chess board to the Layered Pane  
-        chessBoard = new JPanel();
+//        chessBoard = new JPanel();
+//        chessBoard.revalidate();
+//        chessBoard.repaint();
+        
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
         chessBoard.setLayout( new GridLayout(8, 8) );
         chessBoard.setPreferredSize( boardSize );
@@ -288,7 +298,9 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
 				
 			}
  			
- 		}		
+ 		}
+ 		chessBoard.revalidate();
+ 		chessBoard.repaint();
     
 	}
 
