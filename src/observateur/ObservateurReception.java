@@ -2,6 +2,6 @@ package observateur;
 
 public interface ObservateurReception {
 	
-	public Boolean updateObservateurReception();
+	public Boolean updateObservateurReception(Object object);
 
 }

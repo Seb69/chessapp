@@ -19,7 +19,6 @@ public  class LaucherClient {
 			chessGameClient = new ChessGame();	
 			chessGameControlerClient = new ChessGameControler(chessGameClient,ChessGameControler.CLIENT);
 			
-			
 			Thread threadCient = new Thread(chessGameControlerClient);
 			threadCient.start();
 			

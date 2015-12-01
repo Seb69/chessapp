@@ -59,7 +59,12 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 		return false;
 	}
 	
-
+  public boolean moveAllow(Coord initCoord, Coord finalCoord)
+  {
+	  if(currentchessGame.moveAllow( initCoord.x,  initCoord.y,  finalCoord.x,  finalCoord.y)) return true;
+	  
+	  return false;
+  }
 
 
 
@@ -80,13 +85,18 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 	public void run() {
 		
 		// TODO Auto-generated method stub
-		if (SERVER.equals(type)) communication.runServer();
-		if (CLIENT.equals(type)) communication.runClient();
+		if (SERVER.equals(type)) 
+			{
+			communication.runServer();
+			}
+		if (CLIENT.equals(type)) 
+			{
+			communication.runClient();
+			}
 		
 	
 		communication.read(this);
-		
-		//listenningSocket = new ListenningSocket(communication,this);
+	
 
 		
 	}
@@ -95,11 +105,11 @@ public class ChessGameControler  implements ChessGameControlers, Runnable, Obser
 
 
 	@Override
-	public Boolean updateObservateurReception() {
+	public Boolean updateObservateurReception(Object object) {
 
 		
 		System.out.println("Appelle du moveRead");
-		objectToSend = (ObjectToSend) communication.object;
+		objectToSend = (ObjectToSend) object;
 		
 		System.out.println(objectToSend.toString());
 	

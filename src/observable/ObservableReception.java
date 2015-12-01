@@ -7,13 +7,13 @@ public abstract class ObservableReception {
 	
 	ArrayList<ObservateurReception> observeurlist = new ArrayList<ObservateurReception>();
 	
-	public void notifyObservableReception()
+	public void notifyObservableReception(Object object)
 	{
 
 		
 		for (ObservateurReception obs : observeurlist)
 		{
-			obs.updateObservateurReception();
+			obs.updateObservateurReception(object);
 		}
 	}
 

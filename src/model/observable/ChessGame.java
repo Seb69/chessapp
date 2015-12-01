@@ -39,6 +39,15 @@ public class ChessGame extends Observable {
 		return true;
 	} 
 	//-----------------------------------------------------------------------------------------
+	public boolean moveAllow (int xInit, int yInit, int xFinal, int yFinal) {
+		
+		if (!currentechiquier.isMoveOk( xInit,  yInit,  xFinal,  yFinal)) return false;
+		if (!currentechiquier.isMoveLegal( xInit,  yInit,  xFinal,  yFinal)) return false;
+		if (!currentechiquier.move ( xInit,  yInit,  xFinal,  yFinal)) return false ;
+			
+		return true;
+	} 
+	//-----------------------------------------------------------------------------------------
 	public boolean isEnd() {
 		
 		return currentechiquier.isEnd();
